@@ -25,6 +25,7 @@ from mnemonic import Mnemonic as bip39
 from pycoin.symbols.btc import network as BTC
 from pycoin.encoding.bytes32 import from_bytes_32, to_bytes_32
 import base58
+import base64
 
 
 class BIP85(object):
@@ -85,6 +86,9 @@ class BIP85(object):
 
     def entropy_to_wif(self, entropy):
         return BTC.keys.private(secret_exponent=from_bytes_32(entropy[:32])).wif()
+
+    def entropy_to_base64(self, entropy, trim=21):
+        return base64.encodebytes(entropy)[:trim]
 
     def entropy_to_bip39(self, entropy, words, language='english'):
         width = (words - 1) * 11 // 8 + 1

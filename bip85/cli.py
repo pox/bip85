@@ -66,6 +66,7 @@ def main():
                                 required=True,
                                 help='Number of bytes to generate')
     subparsers.add_parser('xprv', help='Derive an XPRV (master private key)')
+    subparsers.add_parser('password', help='Derive a password')
     args = parser.parse_args()
     xprv = _get_xprv_from_args(args)
     print(f"Using master private key: {xprv}")
@@ -77,6 +78,8 @@ def main():
         print(app.hex(xprv, args.index, args.num_bytes))
     elif args.bip85_app == 'xprv':
         print(app.xprv(xprv, args.index))
+    elif args.bip85_app == 'password':
+        print(app.password(xprv, args.index))
 
 
 if __name__ == "__main__":

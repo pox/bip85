@@ -64,3 +64,11 @@ def xprv(xprv_string, index):
     bip85 = BIP85()
     path = f"83696968p/32p/{index}p"
     return bip85.bip32_xprv_to_xprv(path, xprv_string)
+
+
+def password(xprv_string, index):
+    bip85 = BIP85()
+    path = f"83696968p/707764p/21p/{index}p"
+    entropy = bip85.bip32_xprv_to_entropy(path, xprv_string)
+    return bip85.entropy_to_base64(entropy)
+
